@@ -2,7 +2,7 @@
 
 This project is a user management web application. The application is built using React, with user data stored using Firebase. The application allows users to register and authenticate, and provides an admin panel for managing users.
 
-## [Live Demo]()
+## [Live Demo](https://user-auth-4aca2.web.app/)
 
 Please click on the link above to see the deployed app.
 
@@ -41,6 +41,6 @@ npm install
 npm run dev
 ```
 
-## [Video]()
+## [Video](https://drive.google.com/file/d/1yBUxTzIYZ796utUnK8tNBcyVC-VSHK46/view?usp=sharing)
 
 Click on the link above to see a video on how the app works.
