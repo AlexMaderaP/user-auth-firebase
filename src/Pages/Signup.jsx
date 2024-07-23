@@ -2,40 +2,32 @@ import {
   Box,
   TextField,
   Button,
-  Link,
   Typography,
   Paper,
   Container,
 } from "@mui/material";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "../api/users";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      setIsLoading(true);
       const formFields = getFormFields(event.currentTarget);
-      if (formFields.password !== formFields.confirmPassword) {
-        setError("Passwords must match!");
-        return;
-      }
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formFields.email,
-        formFields.password
-      );
-      const user = userCredential.user;
-      await setUser(formFields.name, user);
+      await setUser(formFields.name, formFields.email, formFields.password);
       navigate("/");
       setError("");
     } catch (error) {
       setError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -104,11 +96,14 @@ function Signup() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLoading}
             >
               Sign Up
             </Button>
-            <Link href="/login" variant="body2">
-              {"Already have an account? Log In"}
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <Typography variant="body2" color="primary">
+                Don&apos;t have an account? Sign Up
+              </Typography>
             </Link>
           </form>
         </Box>

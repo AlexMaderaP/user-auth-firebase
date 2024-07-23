@@ -12,7 +12,7 @@ function ActionButtons({ users }) {
   async function handleBlock() {
     const usersToBlock = users
       .filter((user) => user.selected)
-      .map((user) => user.id);
+      .map((user) => user.email);
 
     await updateUserStatus(usersToBlock, "Blocked");
   }
@@ -20,7 +20,7 @@ function ActionButtons({ users }) {
   async function handleUnblock() {
     const usersToUnblock = users
       .filter((user) => user.selected)
-      .map((user) => user.id);
+      .map((user) => user.email);
 
     await updateUserStatus(usersToUnblock, "Active");
   }

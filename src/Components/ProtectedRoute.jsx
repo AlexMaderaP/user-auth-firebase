@@ -10,7 +10,7 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     const fetchUserStatus = async () => {
       if (currentUser) {
-        const userDocRef = doc(db, "Users", currentUser.uid);
+        const userDocRef = doc(db, "Users", currentUser.email);
         const userDocSnapshot = await getDoc(userDocRef);
         if (userDocSnapshot.data().status === "Blocked") {
           auth.signOut();

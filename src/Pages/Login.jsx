@@ -2,7 +2,6 @@ import {
   Box,
   TextField,
   Button,
-  Link,
   Typography,
   Paper,
   Container,
@@ -10,7 +9,7 @@ import {
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../config/firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { updateLastLogInUser } from "../api/users";
 
 const Login = () => {
@@ -81,8 +80,10 @@ const Login = () => {
             >
               Sign In
             </Button>
-            <Link href="/signup" variant="body2">
-              {"Don't have an account? Sign Up"}
+            <Link to="/signup" style={{ textDecoration: "none" }}>
+              <Typography variant="body2" color="primary">
+                Don&apos;t have an account? Sign Up
+              </Typography>
             </Link>
           </form>
         </Box>

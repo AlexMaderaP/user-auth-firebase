@@ -7,11 +7,16 @@ import {
   TableHead,
   TableRow,
   Checkbox,
+  TableSortLabel,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
 function UsersTable({ users, setUsers }) {
   const [selectAll, setSelectAll] = useState(false);
+
+  const usersInOrder = [...users].sort((a, b) =>
+    a.email.localeCompare(b.email)
+  );
 
   useEffect(() => {
     const allSelected = users.every((user) => user.selected);
@@ -48,13 +53,17 @@ function UsersTable({ users, setUsers }) {
               />
             </TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
+            <TableCell>
+              <TableSortLabel active={true} direction="desc">
+                Email
+              </TableSortLabel>
+            </TableCell>
             <TableCell>Last Login</TableCell>
             <TableCell>Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
+          {usersInOrder.map((user) => (
             <TableRow key={user.id}>
               <TableCell>
                 <Checkbox
